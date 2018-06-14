@@ -1,9 +1,3 @@
-
-
-
-
-
-
 DABBLE.BY.AJAY
 
 ## GOALS
