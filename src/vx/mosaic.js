@@ -1,31 +1,42 @@
-import * as d3 from 'd3'
+import * as d3 from 'd3';
+import React, { Component } from 'react';
 
-colorMesh = () => {
 
-    var width = 960,
-        height = 500;
+export default class mosaic extends Component {
 
-    var sampler = poissonDiscSampler(width, height, 30),
-        samples = [],
-        sample;
+   const width = 960;
+   const  height = 500;
 
-    while (sample = sampler()) samples.push(sample);
+    constructor(props) {
+        super(props);
 
-    var voronoi = d3.voronoi()
-        .extent([[-1, -1], [width + 1, height + 1]]);
+        this.state = {};
+        var sampler = poissonDiscSampler(width, height, 30),
+            samples = [],
+            sample;
 
-    var svg = d3.select("body").append("svg")
-        .attr("width", width)
-        .attr("height", height);
+        while (sample = sampler()) samples.push(sample);
 
-    svg.selectAll("path")
-        .data(voronoi.polygons(samples))
-        .enter().append("path")
-        .attr("d", function (d) { return "M" + d.join("L") + "Z"; })
-        .style("fill", function (d) { return color(d.data) })
-        .style("stroke", function (d) { return color(d.data) });
+        var voronoi = d3.voronoi()
+            .extent([[-1, -1], [width + 1, height + 1]]);
 
-    function color(d) {
+        var svg = d3.select("body").append("svg")
+            .attr("width", width)
+            .attr("height", height);
+
+        svg.selectAll("path")
+            .data(voronoi.polygons(samples))
+            .enter().append("path")
+            .attr("d", function (d) { return "M" + d.join("L") + "Z"; })
+            .style("fill", function (d) { return color(d.data) })
+            .style("stroke", function (d) { return color(d.data) });
+
+    }
+
+
+
+
+    color = (d) => {
         var dx = d[0] - width / 2,
             dy = d[1] - height / 2;
         return d3.lab(100 - (dx * dx + dy * dy) / 5000, dx / 10, dy / 10);
@@ -36,7 +47,7 @@ colorMesh = () => {
 
 
     // Based on https://www.jasondavies.com/poisson-disc/
-    function poissonDiscSampler(width, height, radius) {
+    poissonDiscSampler = (width, height, radius) => {
         var k = 30, // maximum number of samples before rejection
             radius2 = radius * radius,
             R = 3 * radius2,
@@ -105,4 +116,15 @@ colorMesh = () => {
             return s;
         }
     }
+
+
+
+    render() {
+        return (
+            <div>
+                {voronoi}
+            </div>
+        );
+    }
+
 }

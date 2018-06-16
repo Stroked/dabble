@@ -30,7 +30,7 @@ class SymbolDirectory extends Component {
   render() {
     return (
       <div>
-        re
+      
       </div>
     )
   }
