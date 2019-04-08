@@ -4,11 +4,10 @@
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
-  height: 80px;
 }
 
 .App-header {
-  background-color: #222;
+  background-color: rgba(128, 157, 236, 0.582);
   height: 150px;
   padding: 20px;
   color: white;
@@ -23,6 +22,33 @@
 }
 
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.links {
+  stroke: #000;
+  stroke-opacity: 0.2;
+}
+
+.polygons {
+  fill: none;
+  stroke: rgb(173, 197, 63);
+}
+
+.polygons :first-child {
+  fill: #f00;
+}
+
+.sites {
+  fill: #666;
+  stroke: #fff;
+}
+
+.sites :first-child {
+  fill: #fff;
 }
